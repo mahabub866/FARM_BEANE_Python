@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+python-decouple
+beanie==1.10.8
+email-validator
+python-jose
+python-multipart
