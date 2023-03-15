@@ -1,6 +1,6 @@
 __pycache__
 fast-env
-# .env
+# .env                                                                                                                                
 # JWT_SECRET_KEY=Mahabobur27dec1997!mahabub866!7276@127866
 # JWT_REFRESH_SECRET_KEY=Mahabobur27dec1997!mahabub866!7276@127866hidayahredsolutionorch
 # MONGO_CONNECTION_STRING=mongodb://localhost:27017/
