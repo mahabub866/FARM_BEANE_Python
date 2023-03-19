@@ -8,6 +8,7 @@ from api.api_1.router import router
 from models.todo_model import Todo
 from models.task_model import Task
 from models.demo_model import Demo
+from models.role_model import Role
 app = FastAPI(
     title=settings.PROJECT_NAME,
     openapi_url=f"{settings.API_V1_STR}/openapi.json"
@@ -27,7 +28,8 @@ async def app_init():
            User,
            Todo,
            Task,
-           Demo
+           Demo,
+           Role
         ]
     )
 

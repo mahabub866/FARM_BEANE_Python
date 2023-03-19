@@ -17,7 +17,8 @@ class UserOut(BaseModel):
     last_name: Optional[str]
     status: Optional[bool] = False
     
-
+    class Config:
+        orm_mode = True
 class UserUpdate(BaseModel):
     email: Optional[EmailStr] = None
     first_name: Optional[str] = None
