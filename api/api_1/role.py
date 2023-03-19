@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException,Depends,status
 from models.role_model import Role
 from models.user_model import User
-from schemas.role_schema import RoleOut
+from schemas.role_schema import RoleOut,RoleSuperCreate
 from typing import List
 from beanie import PydanticObjectId
 from bson import ObjectId
@@ -10,9 +10,22 @@ from .depends import get_current_user
 role_router = APIRouter()
 
 
-@role_router.post("/mymodel")
-async def create_mymodel(item: Role,current_user: User = Depends(get_current_user)):
+@role_router.post("/super/admin",status_code=status.HTTP_201_CREATED)
+async def create_mymodel(data: RoleSuperCreate):
+    count =  await Role.find_one()
+    
+    if count is None:
+        add=Role(name=data.name,active=data.active,Role=data.Role)
+        await add.create()
+        return {"message":"Role Create Sucessfully"}
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail="Super Admin Already Created")
 
+    # await item.create()
+    # return item
+@role_router.post("/role/create")
+async def create_mymodel(item: Role,current_user: User = Depends(get_current_user)):
     
     await item.create()
     return item

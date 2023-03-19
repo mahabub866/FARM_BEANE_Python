@@ -12,7 +12,7 @@ class User(Document):
     first_name: Optional[str] = None 
     last_name: Optional[str] = None
     status: Optional[bool] = None
-    
+    token:Optional[str]=None
     
     def __repr__(self) -> str:
         return f"<User {self.email}>"
