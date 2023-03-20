@@ -22,6 +22,7 @@ async def get_documents(current_user: User = Depends(get_current_user)):
 
 @todo_router.get("/all/without",summary="Get all todos without links ",response_model=List[TodoOut])
 async def get_documents(current_user: User = Depends(get_current_user)):
+    
     collection = Todo
 
     documents = []
@@ -34,6 +35,7 @@ async def get_documents(current_user: User = Depends(get_current_user)):
 
 @todo_router.post('/create', summary="Create Todo", response_model=Todo)
 async def create_todo(data: TodoCreate, current_user: User = Depends(get_current_user)):
+    
     return await TodoService.create_todo(current_user, data)
 
 

@@ -9,6 +9,7 @@ from models.todo_model import Todo
 from models.task_model import Task
 from models.demo_model import Demo
 from models.role_model import Role
+from models.blocktoken_model import Block
 app = FastAPI(
     title=settings.PROJECT_NAME,
     openapi_url=f"{settings.API_V1_STR}/openapi.json"
@@ -29,7 +30,8 @@ async def app_init():
            Todo,
            Task,
            Demo,
-           Role
+           Role,
+           Block
         ]
     )
 

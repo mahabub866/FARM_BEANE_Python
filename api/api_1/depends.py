@@ -7,7 +7,7 @@ from jose import jwt
 from pydantic import ValidationError
 from services.user_service import UserService
 from schemas.auth_schema import TokenPayload
-
+from models.blocktoken_model import Block
 reuseable_oauth = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_STR}/auth/login",
     scheme_name="JWT"
@@ -19,8 +19,12 @@ async def get_current_user(token: str = Depends(reuseable_oauth)) -> User:
         payload = jwt.decode(
             token, settings.JWT_SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
-        token_data = TokenPayload(**payload)
         
+        token_data = TokenPayload(**payload)
+      
+        check =  await Block.find_one(Block.token==token,Block.user_id==payload['sub'])
+        if check:
+            raise HTTPException(status_code=403, detail="This token has been revekod")
         if datetime.fromtimestamp(token_data.exp) < datetime.now():
             raise HTTPException(
                 status_code = status.HTTP_401_UNAUTHORIZED,
